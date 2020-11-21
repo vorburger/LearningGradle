@@ -1,0 +1,34 @@
+// https://docs.gradle.org/6.7.1/userguide/tutorial_using_tasks.html#sec:shortcut_notations
+
+ext.greeting = "hello, world"
+// println "The $greeting"
+
+task demo {
+    dependsOn "hello"
+    doLast {
+        println "I'm Gradle"
+    }
+}
+
+task hello {
+    doLast {
+        println "Yo $greeting"
+        foo(1968)
+    }
+}
+
+buildscript {
+    repositories {
+        // mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.google.guava:guava:30.0-jre"
+    }
+}
+
+import com.google.common.base.Joiner
+
+void foo(int year) {
+    println "bar $year " +  Joiner.on("; ").join("Harry", "Ron", "Hermione");
+}
